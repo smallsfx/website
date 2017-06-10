@@ -3,7 +3,7 @@
 
 ## 基于 Nodejs & Bootstrap & mysql 的快速开发框架
 
-bootstrap负责UI展示，nodejs用于后台请求处理，数据存储到mysql
+bootstrap负责UI展示，nodejs用于后台请求处理，数据存储到mysql
 
 ## 概述
 
@@ -13,28 +13,36 @@
 
 前端采用标准bootstrap框架，对表单进行了拆分、重构及封装，可通过定制表单结构自动生成增删改查等简单操作，亦可根据业务需求实现自定义表单内容及处理流程。
 
+---
+
 备注：
-* `http://domain:3000/apis` 当前框架已加载的controll（包括名称、描述、权限）
-* `http://domain:3000/` blog类UI
-* `http://domain:3000/admin/` 管理系统或后台类UI
-* `http://domain:3000/chat/` 基于socket.io的即时通讯开发示例
+
+1. `http://domain:3000/apis` 当前框架已加载的controll（包括名称、描述、权限）
+
+2. `http://domain:3000/` blog类UI
+
+3. `http://domain:3000/admin/` 管理系统或后台类UI
+
+4. `http://domain:3000/chat/` 基于socket.io的即时通讯开发示例
 ---
 ## 安装 & 部署
 
 ### 依赖关系
 
-1. Nodejs
+1. Nodejs
 2. MySQL
 
 ### 安装
 
-website根目录 初始化nodejs依赖包 `npm install`
+1. 进入website根目录
+2. 初始化nodejs依赖包 `npm install`
 
 ### 部署
 
-website根目录 执行命令 `npm start`
+1. 进入website根目录
+2. 执行启动命令 `npm start`
 
-## 更新日志 
+# 更新日志 
 
 ### v0.0.1 2017年6月10日 18:25 初次建库
 1. 动态表单生成，并支持自定义表单
@@ -46,24 +54,114 @@ website根目录 执行命令 `npm start`
 7. 集成即使通讯模块
 8. 集成百度ECharts图标控件
 
+# 示例
 
+## 一、 Controller 定义
+```javascript
+module.exports = {
+  // API根目录
+  "rootpath": "/api/school/",
+  // API定义 default为默认根目录
+  "mapping": {
+    "default": { "description": "获取学校列表" },
+    "insert": { "description": "新增学校" },
+    "update": { "description": "修改学校" },
+    "delete": { "description": "删除学校" }
+  },
+  // 数据模型定义
+  "entity": {
+    // 数据表名称
+    "table": "object_school",
+    // 数据表对应字段名称、数据类型定义
+    "columns": [
+      { "name": "id", "primary": true },
+      { "name": "name", "base64": true, "requid": true, "filter": "like" },
+      { "name": "type", "filter": "multiple", "requid": true },
+      { "name": "addr", "base64": true, "requid": true, "filter": "like" },
+      { "name": "telphone", "filter": "like" },
+      { "name": "describe", "base64": true, "filter": true },
+      { "name": "jointime", "filter": "daterange" },
+      { "name": "imgs" }
+    ]
+  }
+}
+```
 
+```javascript
+// entity.column 介绍
+// name           数据表对应的字段名称
+// primary        是否为数据表主键，用于增删改操作，记录操作日志时也会用到
+// base64         标示数据项在传输过程中是否采用base64加密
+// filter         当数据项作为查询条件时的处理方式 枚举值
+//    mulitple    多数值匹配类型，常用于字典表
+//    like        模糊查询
+//    daterange   日期时间段 
+//    true        标示数据项在查询时作为筛选条件
+// requid         标示数据项在新增和修改时为必填项
+// unique         标示数据项唯一
+// default        方法类型,为数据项设置默认值
+//    function(req,res){return string}
+```
 
 # Common API
 
 暂无描述
 
+## API Request & Response
+
+1. 操作成功
+```json
+{
+  // 操作结果 0表示成功；0其他为失败
+  "c":0,
+  // 返回的数据
+  "data":{
+    // 分页数据专有：页面大小
+    "pagesize":6,
+    // 分页数据专有：页面总数
+    "pagecount":2,
+    // 分页数据专有：记录总数
+    "recordcount":7,
+    // 分页数据专有：当前页码
+    "pagenumber":1,
+    // 列表数据专有：表示数据列表
+    "list":[]
+  }
+}
+```
+2. 操作失败
+```json
+{
+  // 操作结果
+  "c":1,
+  // 错误消息描述：采用base64加密
+  "m":"55So5oi35ZCN5oiW5a+G56CB5LiN5q2j56Gu",
+  // 调试模式专有：未加密错误描述
+  "zh_cn":"用户名或密码不正确"
+}
+```
+
 ## 路由列表 | Routes List
 
   * 用户鉴权 | api/account
   * 活动管理 | api/activity
+  * 动态管理 | api/article
   * 字典管理 | api/dict
   * 日志管理 | api/logs
   * 机构管理 | api/organization  
+  * 学校管理 | api/school  
   * 角色管理 | api/roles
   * 参数设置 | api/settings
   * 用户管理 | api/users
+  * 评论插件 | api/comment
+  * 环境变量 | api/environment
+  * 文件列表 | api/files
+  * 文件修改 | api/files/update   [未完成]
+  * 文件删除 | api/files/delete   [未完成]
+  * 文件上传 | api/upload
+  * 获取文件 | /file
 
+q
 
 ## 用户鉴权 | api/account
 
@@ -81,6 +179,24 @@ website根目录 执行命令 `npm start`
 u|string|登录账号
 p|string|登录密码
 
+```json
+// /api/account/login?u=d2FuZ3hpbg%3D%3D&p=MTIzNDU2
+{
+  "c":0,
+  "data":{
+    "account":"d2FuZ3hpbg==",
+    "name":"546L6ZGr",
+    "nickname":"5bCP5LyN",
+    "email":"YWRtaW5fc21hbGxAMTYzLmNvbQ==",
+    "rolename":"57O757uf566h55CG5ZGY",
+    "list":[
+      "101",
+      "102"
+    ]
+  }
+}
+```
+
 ### 2.用户登录 | login
 
 序号|类型|描述
@@ -88,7 +204,10 @@ p|string|登录密码
 u|string|登录账号
 p|string|登录密码
 
-
+```json
+// /api/account/logout
+{"c":0}
+```
 
 /api/activity/
 

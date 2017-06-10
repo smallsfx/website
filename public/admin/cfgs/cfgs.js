@@ -1,5 +1,5 @@
 ﻿// var server = "http://192.168.3.97:8080/api/";
-const img_server = "http://192.168.3.227:3000/";
+const img_server = "http://localhost:3000/";
 // const img_server = "http://192.168.1.104:3000/";
 const server = img_server + "api/";
 
