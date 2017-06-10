@@ -110,7 +110,7 @@ module.exports = {
 ## API Request & Response
 
 1. 操作成功
-```json
+```javascript
 {
   // 操作结果 0表示成功；0其他为失败
   "c":0,
@@ -130,7 +130,7 @@ module.exports = {
 }
 ```
 2. 操作失败
-```json
+```javascript
 {
   // 操作结果
   "c":1,
@@ -179,7 +179,7 @@ q
 u|string|登录账号
 p|string|登录密码
 
-```json
+```javascript
 // /api/account/login?u=d2FuZ3hpbg%3D%3D&p=MTIzNDU2
 {
   "c":0,
@@ -204,7 +204,7 @@ p|string|登录密码
 u|string|登录账号
 p|string|登录密码
 
-```json
+```javascript
 // /api/account/logout
 {"c":0}
 ```
