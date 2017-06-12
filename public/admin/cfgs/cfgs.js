@@ -1,5 +1,9 @@
 ﻿// var server = "http://192.168.3.97:8080/api/";
-const img_server = "http://localhost:3000/";
+var img_server = undefined;//"http://localhost:3000/";
+
+if( !img_server){
+    img_server = "http://"+window.location.host+"/";
+}
 // const img_server = "http://192.168.1.104:3000/";
 const server = img_server + "api/";
 
@@ -82,7 +86,7 @@ cfgs.options.request = {
 /** 时间段选项 */
 cfgs.options.daterange = {
     "opens": "left",
-    "startDate": moment().subtract("days", 29),
+    "startDate": moment().subtract(29, "days"),
     "endDate": moment(),
     "minDate": "2012-01-01",
     "maxDate": moment(),
@@ -94,11 +98,11 @@ cfgs.options.daterange = {
     "timePicker12Hour": false,
     "ranges": {
         "今天": [moment(), moment()],
-        "昨天": [moment().subtract("days", 1), moment().subtract("days", 1)],
-        "最近1周": [moment().subtract("days", 6), moment()],
-        "最近30天": [moment().subtract("days", 29), moment()],
+        "昨天": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+        "最近1周": [moment().subtract(6, "days"), moment()],
+        "最近30天": [moment().subtract(29, "days"), moment()],
         "本月": [moment().startOf("month"), moment().endOf("month")],
-        "上月": [moment().subtract("month", 1).startOf("month"), moment().subtract("month", 1).endOf("month")]
+        "上月": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
     },
     "buttonClasses": ["btn"],
     "applyClass": "btn-info",

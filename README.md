@@ -1,5 +1,6 @@
 # website
 
+你身边的快速开发框架
 
 ## 基于 Nodejs & Bootstrap & mysql 的快速开发框架
 
@@ -88,14 +89,14 @@ module.exports = {
 ```
 
 ```javascript
-// entity.column 介绍
+// entity.column 介绍
 // name           数据表对应的字段名称
 // primary        是否为数据表主键，用于增删改操作，记录操作日志时也会用到
 // base64         标示数据项在传输过程中是否采用base64加密
 // filter         当数据项作为查询条件时的处理方式 枚举值
 //    mulitple    多数值匹配类型，常用于字典表
-//    like        模糊查询
-//    daterange   日期时间段 
+//    like        模糊查询
+//    daterange   日期时间段
 //    true        标示数据项在查询时作为筛选条件
 // requid         标示数据项在新增和修改时为必填项
 // unique         标示数据项唯一
@@ -114,7 +115,7 @@ module.exports = {
 {
   // 操作结果 0表示成功；0其他为失败
   "c":0,
-  // 返回的数据
+  // 返回的数据
   "data":{
     // 分页数据专有：页面大小
     "pagesize":6,
@@ -136,7 +137,7 @@ module.exports = {
   "c":1,
   // 错误消息描述：采用base64加密
   "m":"55So5oi35ZCN5oiW5a+G56CB5LiN5q2j56Gu",
-  // 调试模式专有：未加密错误描述
+  // 调试模式专有：未加密错误描述
   "zh_cn":"用户名或密码不正确"
 }
 ```

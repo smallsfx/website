@@ -10,11 +10,11 @@
     };  
     var options = $.extend(defaults, options);
     var fbmodalHtml=
-      '<div id="fbmodal" class="box border default">\
-        <div class="box-title">\
-          <h4></h4>\
+      '<div id="fbmodal" class="panel panel-default border">\
+        <div class="panel-heading-title">\
+          <panel-title/>\
         </div>\
-        <div class="box-body">\
+        <div class="panel-body">\
         </div>\
       </div>';
 
@@ -37,10 +37,10 @@
       var dat=this.html();
       $("body").append(fbmodalHtml);
       $('#fbmodal').css("top",options.top);
-      $('#fbmodal .box-title h4').append(options.title);
-      $('#fbmodal .box-body').append(dat).css("width", options.width);
+      $('#fbmodal .panel-heading .panel-title').append(options.title);
+      $('#fbmodal .panel-body').append(dat).css("width", options.width);
       if (options.height) {
-        $('#fbmodal .box-body').append(dat).css("height", options.height);
+        $('#fbmodal .panel-body').append(dat).css("height", options.height);
       }
       $("body").append('<div id="fbmodal_overlay" class="fbmodal_hide"></div>');
       $("#fbmodal_overlay").addClass("fbmodal_overlay").fadeTo(0,options.opacity);

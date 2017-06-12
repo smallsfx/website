@@ -178,7 +178,8 @@
             //,contentType:"application/json; charset=utf-8"
             //,cache: false
             //, crossDomain: true
-            "async": async,
+            // "async": async,
+            async: true ,
             "success": onSuccess,
             "error": onRequestError,
             "url": api,

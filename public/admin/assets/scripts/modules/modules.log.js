@@ -30,8 +30,8 @@
         "columns": [
           { "name": "_index", "text": "序号" },
           { "name": "id", "primary": true },
-          { "name": "owner", "text": "所属账号", "base64": true, "filter": true, "filterindex": 1 },
-          { "name": "type", "text": "日志类型", "custom": initType, "filter": true, "filterindex": 2 },
+          { "name": "owner", "text": "所属账号", "base64": true, "filter": true, "filterindex": 2 },
+          { "name": "type", "text": "日志类型", "custom": initType, "filter": true, "filterindex": 1 },
           { "name": "msg", "text": "详情", "base64": true, "filter": true, "filterindex": 3 },
           { "name": "date", "text": "操作时间", "type": "date", "filter": "daterange", "filterindex": 5 },
           { "name": "ip", "text": "登录IP", "base64": true, "filter": true, "filterindex": 4 }

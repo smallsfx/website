@@ -12,7 +12,8 @@ exports.config = {
   /** 目录结构定义 */
   "catalog": {
     "upload": "public/avatar/", // 上传文件存放目录
-    "handler": "lib/handlers/",// handler 存放目录
+    "request-handler": "lib/request-handlers",// request-handler 存放目录
+    "server-handler": "lib/server-handlers",// server-handler 存放目录
     "controller": "lib/controllers", // controller 存放目录
     "typeextend": "lib/extends", // typeextends 存放目录
     "module": "lib/modules", // modules 存放目录
@@ -20,7 +21,7 @@ exports.config = {
   "middleware": {
     "fsh": {
       "ignore": [
-        ".git",".svn",".DS_Store"
+        ".git", ".svn", ".DS_Store"
       ]
     }
   },
@@ -56,5 +57,5 @@ exports.config = {
       "waitForConnections": false,
       charset: "UTF8_GENERAL_CI"
     }
-  }
+  },
 }

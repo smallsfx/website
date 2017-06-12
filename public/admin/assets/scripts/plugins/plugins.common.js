@@ -44,14 +44,14 @@
     var displaycolumns = [];
 
     var hasFilter = false;
-    var columns = plugin_option.columns;
+
     // 为列数组设置初始索引 index:用于排序
-    $.each(columns, function (index, column) {
+    $.each(plugin_option.columns, function (index, column) {
       column.index = index;
     });
-    columns = columns.sort(compare_filterindex);
+    plugin_option.columns = plugin_option.columns.sort(compare_index);
     // 遍历columns设置,获取table的显示字段名称
-    $.each(columns, function (index, column) {
+    $.each(plugin_option.columns, function (index, column) {
       // 处理主键字段
       if (column.primary) {
         primaryKey = column.name;
@@ -69,15 +69,21 @@
     });
 
     $("#record-panel").tmpl(plugin_option).appendTo('#record-container');
+
     // 判断是否有新增功能:如果有则设定按钮文字样式及事件
     if (plugin_option.actions.insert) {
       $(".btn_add").on("click", edit_click);
     }
+
     App.table.render($("#table"), displaycolumns);
 
     if (hasFilter) {// 处理查询条件区块内容及事件
+      plugin_option.columns = plugin_option.columns.sort(compare_filterindex);
       $("#filter-panel").tmpl(plugin_option).appendTo('#filter-container');
-      $.each(columns, function (index, column) {
+
+      $.each(plugin_option.columns, function (index, column) {
+        // if (column.filterindex == 4) { return; }
+        // console.log(index + "," + JSON.stringify(column));
         if (column.custom) {
           var columndiv = $("#" + column.name).parent();
           columndiv.empty();
@@ -87,7 +93,8 @@
         } else if (typeof column.dict === "string") {
           App.form.initDict(column.dict, $("#" + column.name), null);
         }
-      });
+      });//$.each(columns, function (index, column) {
+
       /* 注册查询按钮点击事件 */
       $(".btn_search").on("click", _search);
       /* 注册重置按钮点击事件 */
@@ -291,6 +298,7 @@
       return 0;
     }
   }
+
   /** 根据页面输入条件查询也过并填充表格 */
   var _search = function () {
     var options = {};
@@ -298,9 +306,7 @@
       options = plugin_option.args.search;
     }
 
-    var columns = plugin_option.columns;
-    columns = columns.sort(compare_filterindex);
-    $.each(columns, function (index, column) {
+    $.each(plugin_option.columns, function (index, column) {
       if (!column.filter) { return; } // 没有filter选项,不需要筛选
       if (column.filter == "daterange") {
         var starttime = $("#" + column.name + "_1").val();
@@ -384,12 +390,10 @@
   }
   /** 重置页面输入项 */
   var _reset = function () {
-    var columns = plugin_option.columns;
-    columns = columns.sort(compare_index);
-    $.each(columns, function (index, column) {
+    $.each(plugin_option.columns, function (index, column) {
       if (!column.filter) { return; } // 没有filter选项,不需要筛选
       if (column.filter == "daterange") { // 处理时间段类型筛选
-        $("#" + column.name + "_1").val(moment().subtract("days", 29).format(cfgs.options.defaults.dateformat));
+        $("#" + column.name + "_1").val(moment().subtract(29, "days").format(cfgs.options.defaults.dateformat));
         $("#" + column.name + "_2").val(moment().format(cfgs.options.defaults.dateformat));
       } else if (column.type == "dict") {
         $("#" + column.name).select2("val", "");

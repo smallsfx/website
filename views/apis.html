@@ -130,16 +130,13 @@
   <section>
     <div class="navigation-container">
       <nav>
+        <% groups.forEach(function(group){ %>
         <div class="tags-item">
-          <a href="#">
-            <span>热门</span>
+          <a href="#<%= group %>">
+            <span><%= group %></span>
           </a>
         </div>
-        <div class="tags-item">
-          <a href="#">
-            <span>推荐</span>
-          </a>
-        </div>
+        <% }) %>
       </nav>
     </div>
     <div class="content-container">
@@ -148,11 +145,17 @@
         <% apis.forEach(function(api){ %>
           <li class="article-item">
             <div>
-              <p><%= api.url %></p>
+              <p>
+                <%= api.url %>
+                <% if ( api.auth) { %> 
+                <span>需要权限验证</span>
+                <% } %>  
+              </p>
               <p><%= api.description %></p>
-              <% if ( api.auth) { %> 
-              <span>需要权限验证</span>
-              <% } %>  
+              <% api.rule.forEach(function(rule){ %>
+              <p><%= rule %></p>
+              <% }) %>
+              
             </div>
           </li>
           <% }) %>

@@ -43,7 +43,7 @@
   return {
     /** 应用入口. */
     "onReady": function () {
-      App.logger.debug("应用程序启动");
+      App.logger.info("应用程序启动");
       /* 注册按钮事件 */
       $(".sys-logout").on("click", function () {
         App.ajax(API.login.logoutapi, {}, function (json) {
@@ -59,10 +59,10 @@
       });
 
       if (!App.readCookie()) {
-        App.logger.debug("TOKEN验证失败,重新登录");
+        App.logger.info("TOKEN验证失败,重新登录");
         App.route.gotoLogin();/*不存在token或token失效，需重新登录*/
       } else {
-        App.logger.debug("TOKEN验证成功,进入系统");
+        App.logger.info("TOKEN验证成功,进入系统");
         App.route.gotoMain();/*token有效，可正常使用系统*/
       }
     },
