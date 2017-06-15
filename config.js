@@ -33,29 +33,24 @@ exports.config = {
       "engine": "html", // 页面试图引擎，默认为html
       /** Session 相关设置 */
       "session": {
-        secret: '12345',
+        "secret": '12345',
         //name: 'MYAPPNAME',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-        cookie: { maxAge: 30 * 1000 * 60 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
-        resave: false,
-        saveUninitialized: true
+        "cookie": { maxAge: 30 * 1000 * 60 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+        "resave": false,
+        "saveUninitialized": true
       }
     },
   },
   /** 数据库参数设置 */
   "database": {
-    "current": "mysql",
     "mysql": {
       "connectionLimit": 30,
       "host": "localhost",
       "password": "123456",
-      //"host": "192.168.1.103",
-      //"password": "123456",
-      //"host": "115.28.5.71",
-      //"password": "lgkj1234",
       "user": "root",
       "database": "nodejs",
       "waitForConnections": false,
-      charset: "UTF8_GENERAL_CI"
+      "charset": "UTF8_GENERAL_CI"
     }
   },
 }

@@ -25,7 +25,6 @@
       "done": function () { $("#" + filter.name).attr("data-value", value); }
     });
   }
-
   app.plugins.admin = {
     "init": function () {
       var options = {

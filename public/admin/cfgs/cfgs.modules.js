@@ -21,9 +21,10 @@ cfgs.listpage = "views/common/searchs.html";
  */
 cfgs.modules = {
     "0100": { "parent": "000", "name": "监控中心", "icon": "fa fa-tachometer", "iconcolor": "red" },
-    "0101": { "parent": "0100", "name": "服务器状态", "url": "views/common/serverstatus.html", "callback": "$M.server.status", "icon": "fa fa-file-text-o" },
-    "0102": { "parent": "0100", "name": "服务端版本", "url": "views/common/version.server.html", "icon": "fa fa-file-text-o" },
-    "0103": { "parent": "0100", "name": "客户端版本", "url": "views/common/version.client.html", "icon": "fa fa-file-text-o" },
+    // "0101": { "parent": "0100", "name": "高德地图", "url": "views/common/amap.html", "callback": "$M.map.initamap","leave":"$M.map.deinitamap", "icon": "fa fa-map" },
+    "0102": { "parent": "0100", "name": "服务器状态", "url": "views/common/serverstatus.html", "callback": "$M.server.status", "icon": "fa fa-file-text-o" },
+    "0103": { "parent": "0100", "name": "服务端版本", "url": "views/common/version.server.html", "icon": "fa fa-file-text-o" },
+    "0104": { "parent": "0100", "name": "客户端版本", "url": "views/common/version.client.html", "icon": "fa fa-file-text-o" },
 
     "0200": { "parent": "000", "name": "个人中心", "icon": "fa fa-user" },
     "0201": { "parent": "0200", "name": "我的资料", "url": "views/master/profile.html", "callback": "$M.profile", "icon": "fa fa-file-text-o" },

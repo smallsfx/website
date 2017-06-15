@@ -6,6 +6,7 @@
  * 
  * ======================================================================== */
 (function(app) {
+
     /** 处理登录超时 */
     var doLoginTimeout = function() {
         App.alertText("登录超时,请重新登录", function() {
@@ -13,9 +14,11 @@
             App.route.gotoLogin();
         });
     }
+
     /**处理服务端返回的业务逻辑错误
      * @param {json} json 服务端返回的结果 json={"c":"code","m":"base64code"}
      */
+
     var onServerError = function(json) {
         if (json.c == "1") {
             App.alertText(App.base64.decode(json.m));
@@ -27,11 +30,13 @@
             App.alertText("其他未知错误<BR/>错误代码:" + json.c);
         }
     }
+
     /** 处理HTTP请求异常.
      * @param xhr .
      * @param textStatus .
      * @param errorThrown .
      */
+
     var onRequestError = function(xhr, textStatus, errorThrown) {
         /// <summary>处理HTTP请求异常.<para>请求失败时调用此函数.</para></summary>
         App.logger.debug("请求失败:" + xhr.status);
@@ -54,8 +59,8 @@
      * @param api 请求的接口.
      * @param options 请求附加的参数.
      * @param callback 请求回调函数.
-     * =======================================================================
      */
+
     var _ajax_request = function(api, options, callback) {
         /// <summary>发起AJAX请求.</summary>
         /// <param name="api">请求的接口.</param>
@@ -199,13 +204,14 @@
         /*执行操作请求*/
         $.ajax(ajaxOptions);
     };
+
     /** 发起AJAX请求.
-     * @param api 请求的接口.
-     * @param options 请求附加的参数.
-     * @param callback 请求回调函数.
-     * =======================================================================
+     * @param {string} api 请求的接口.
+     * @param {object} options 请求附加的参数.
+     * @param {Function} callback 请求回调函数.
      */
     app.ajax = function(api, options, callback) {
         _ajax_request(api, options, callback);
     };
+
 })(App);

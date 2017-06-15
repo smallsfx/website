@@ -79,7 +79,6 @@
     <!-- 页面 -->
     <section></section>
     <!--/页面 -->
-
     <!-- 页脚内容 -->
     <footer>
         <div class="container text-center">Copyright Wangxin (c) 2016-2026.</div>
@@ -121,11 +120,12 @@
     <!--Tree 控件-->
     <script src="../assets/plugins/jstree/jstree.min.js"></script>
     <script src="../assets/plugins/bootstrap-collapse.js"></script>
+    <!--jQuery md5 插件-->
     <script src="../assets/plugins/jQuery.md5.js"></script>
-    <!--JQuery 模板插件-->
+    <!--jQuery 模板插件-->
     <script src="../assets/plugins/jquery-tmpl/jquery.tmpl.min.js"></script>
     <script src="../assets/plugins/jquery-tmpl/jquery.tmplPlus.min.js"></script>
-    <!-- Peity -->
+    <!-- jQuery Peity -->
     <script src="../assets/plugins/peity/jquery.peity.min.js"></script>
     <!-- CodeMirror -->
     <script src="../assets/plugins/codemirror/codemirror.js"></script>
@@ -134,12 +134,16 @@
     <script src="../assets/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
     <!-- ECharts -->
     <script src="../assets/plugins/echarts/echarts-all.js"></script>
-    
+
+
+    <script src="http://webapi.amap.com/maps?v=1.3&key=f0948ced2976d1bcc654eff99d796a32"></script>
+    <script src="http://webapi.amap.com/ui/1.0/main.js"></script>
+    <script src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
     <!-- 配置信息 -->
     <script src="cfgs/cfgs.js"></script>
     <script src="cfgs/cfgs.modules.js"></script>
     <script src="cfgs/cfgs.apis.js"></script>
-    
+
     <!-- 基础框架 -->
     <script src="assets/scripts/app.js"></script>
     <script src="assets/scripts/core/App.ajax.js"></script>
@@ -170,8 +174,10 @@
     <script src="assets/scripts/modules/modules.server.js"></script>
     <script src="assets/scripts/modules/modules.comment.js"></script>
 
+    <script src="assets/scripts/modules/modules.map.js"></script>
+
     <script>
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
             App.onReady();
         });
     </script>

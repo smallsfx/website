@@ -162,7 +162,6 @@ module.exports = {
   * 文件上传 | api/upload
   * 获取文件 | /file
 
-q
 
 ## 用户鉴权 | api/account
 
@@ -172,14 +171,18 @@ q
 
 1. 用户登录
 2. 用户注销
+3. 修改用户密码
+4. 修改用户信息
 
 ### 1.用户登录 | login
 
+#### 参数说明
 序号|类型|描述
 :----|:-----:|-----:
 u|string|登录账号
 p|string|登录密码
 
+#### 示例代码
 ```javascript
 // /api/account/login?u=d2FuZ3hpbg%3D%3D&p=MTIzNDU2
 {
@@ -198,193 +201,44 @@ p|string|登录密码
 }
 ```
 
-### 2.用户登录 | login
+### 2.用户注销 | logout
 
-序号|类型|描述
-:----|:-----:|-----:
-u|string|登录账号
-p|string|登录密码
-
+#### 示例代码
 ```javascript
 // /api/account/logout
 {"c":0}
 ```
 
-/api/activity/
-
-获取活动列表
-
-需要权限验证
-/api/activity/add
-
-新增活动
-
-需要权限验证
-/api/activity/update
-
-修改活动
-
-需要权限验证
-/api/activity/delete
-
-删除活动
-
-需要权限验证
-/api/article/
-
-获取动态列表
-
-需要权限验证
-/api/comment/
-
-获取评论列表
-
-需要权限验证
-/api/comment/add
-
-评论
-
-需要权限验证
-/api/comment/delete
-
-根据评论编号,删除一条评论.
-
-需要权限验证
-/api/comment/user
-
-根据用户编号获取该用户的全部评论
-
-需要权限验证
-/api/organization/
-
-获取培训机构列表
-
-需要权限验证
-/api/organization/add
-
-新增培训机构
-
-需要权限验证
-/api/organization/update
-
-修改培训机构
-
-需要权限验证
-/api/organization/delete
-
-删除培训机构
-
-需要权限验证
-/api/school/
-
-获取学校列表
-
-需要权限验证
-/api/school/add
-
-新增学校
-
-需要权限验证
-/api/school/update
-
-修改学校
-
-需要权限验证
-/api/school/delete
-
-删除学校
-
-需要权限验证
-/api/dict/
-
-获取字典数据列表
-
-需要权限验证
-/api/dict/all
-
-获取全部字典数据列表
-
-需要权限验证
-/api/dict/add
-
-新增字典数据
-
-需要权限验证
-/api/dict/update
-
-修改字典数据
-
-需要权限验证
-/api/dict/delete
-
-删除字典数据
-
-需要权限验证
-/api/environment/
-
-获取系统运行环境
-
-需要权限验证
-/api/files
-
-获取用户拥有的文件列表
-
-需要权限验证
-/api/upload
-
-文件上传
-
-需要权限验证
-/file
-
-根据编号获取文件
-
-/api/files/update
-
-修改文件信息
-
-需要权限验证
-/api/files/delete
-
-删除文件
-
-需要权限验证
-/api/settings/
-
-获取全部参数信息
-
-需要权限验证
-/api/settings/read
-
-获取设置信息
-
-需要权限验证
-/api/settings/save
-
-保存设置信息
-
-需要权限验证
-/api/ecr/login
-
-获取活动列表
-
-/api/ecr/rolelist
-
-/api/account/login
-
-用户登录
-
-/api/account/logout
-
-用户注销登录
-
-/api/account/changepwd
-
-用户修改密码
-
-/api/account/changeinfo
-
-用户修改基本信息
+### 3.修改用户密码 | changepwd
+
+#### 参数说明
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+u|string|登录账号|必填|base64加密
+p|string|登录原始密码|必填|md5base64加密
+n|string|登录新密码|必填|md5base64加密
+
+#### 示例代码
+```javascript
+// /api/account/changepwd?n=MTIz&p=MTIzNDU2
+{"c":0}
+```
+
+### 4.修改用户信息 | changeinfo
+
+#### 参数说明
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+user|string|登录账号|必填|base64加密
+username|string|用户名称|必填|base64加密
+nickname|string|用户昵称|必填|base64加密
+email|string|Email|必填|
+
+#### 示例代码
+```javascript
+// /api/account/changeinfo
+{"c":0}
+```
 
 /api/account/regist
 
@@ -398,62 +252,311 @@ p|string|登录密码
 
 用户重置密码
 
-/api/logs/
+
+/api/environment/ 需要权限验证
+
+获取系统运行环境
+
+/api/activity/ 需要权限验证
+
+通过查询条件筛选，返回经过分页处理的活动列表。
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string|编号|可选|
+name|string|活动名称|可选|base64 加密
+price|string|报名费用|可选|
+describe|string|活动介绍|可选|base64 加密
+endtime|string|结束时间|可选|
+begintime|string|开始时间|可选|
+imgs|string|图片列表|可选|
+person|string|成人数量|可选|
+children|string|孩子数量|可选|
+type|string|活动类型|可选|
+sender|string|活动发起者|可选|
+sendertype|string|发起者类型|可选|
+
+/api/activity/add 需要权限验证
+
+新增一个活动
+
+/api/activity/update 需要权限验证
+
+修改活动详细信息
+
+/api/activity/delete 需要权限验证
+
+删除一个活动
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string|编号|必填|
+
+/api/article/ 需要权限验证
+
+获取动态列表
+
+/api/comment/ 需要权限验证
+
+获取评论列表
+
+/api/comment/add 需要权限验证
+
+评论
+
+/api/comment/delete 需要权限验证
+
+根据评论编号,删除一条评论.
+
+/api/comment/user 需要权限验证
+
+根据用户编号获取该用户的全部评论
+
+/api/organization/ 需要权限验证
+
+获取培训机构列表
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||可选|
+name|string||可选|base64 加密
+type|string||可选|
+addr|string||可选|base64 加密
+telphone|string||可选|
+describe|string||可选|base64 加密
+jointime|string||可选|
+imgs|string||可选|
+
+/api/organization/add 需要权限验证
+
+新增培训机构
+
+/api/organization/update 需要权限验证
+
+修改培训机构
+
+/api/organization/delete 需要权限验证
+
+删除培训机构
+
+参数|类型|描述|必填项|加密及方式
+
+:----|:-----:|-----:|-----:|-----:
+
+id|string||必填|
+
+/api/school/ 需要权限验证
+
+获取学校列表
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||可选|
+name|string||可选|base64 加密
+type|string||可选|
+addr|string||可选|base64 加密
+telphone|string||可选|
+describe|string||可选|base64 加密
+jointime|string||可选|
+imgs|string||可选|
+
+/api/school/add 需要权限验证
+
+新增学校
+
+/api/school/update 需要权限验证
+
+修改学校
+
+/api/school/delete 需要权限验证
+
+删除学校
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+
+/api/dict/ 需要权限验证
+
+获取字典数据列表
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+dictkey|string||可选|
+itemkey|string||可选|
+itemvalue|string||可选|base64 加密
+
+/api/dict/all 需要权限验证
+
+获取全部字典数据列表
+
+/api/dict/add 需要权限验证
+
+新增字典数据
+
+/api/dict/update 需要权限验证
+
+修改字典数据
+
+/api/dict/delete 需要权限验证
+
+删除字典数据
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+dictkey|string||必填|
+itemkey|string||必填|
+
+/api/files 需要权限验证
+
+获取用户拥有的文件列表
+
+/api/upload 需要权限验证
+
+文件上传
+
+/file
+
+根据编号获取文件
+
+/api/files/update 需要权限验证
+
+修改文件信息
+
+/api/files/delete 需要权限验证
+
+删除文件
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+
+/api/settings/ 需要权限验证
+
+获取全部参数信息
+
+/api/settings/read 需要权限验证
+
+获取设置信息
+
+/api/settings/save 需要权限验证
+
+保存设置信息
+
+/api/ecr/login
+
+获取活动列表
+
+/api/ecr/rolelist
+
+
+/api/logs/ 需要权限验证
 
 获取日志列表
 
-需要权限验证
-/api/logs/types
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||可选|
+date|string||可选|
+owner|string||可选|base64 加密
+ip|string||可选|base64 加密
+type|string||可选|
+msg|string||可选|base64 加密
+
+/api/logs/types 需要权限验证
 
 获取日志类型类表
 
-需要权限验证
-/api/roles/
+/api/roles/ 需要权限验证
 
 获取角色列表
 
-需要权限验证
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||可选|
+name|string||可选|base64 加密
+funcids|string||可选|
+
 /api/roles/all
 
 获取全部角色列表
 
-/api/roles/add
+/api/roles/add 需要权限验证
 
 新增角色
 
-需要权限验证
-/api/roles/update
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+name|string||必填|base64 加密
+funcids|string||必填|
+
+/api/roles/update 需要权限验证
 
 修改角色
 
-需要权限验证
-/api/roles/delete
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+name|string||必填|base64 加密
+funcids|string||必填|
+
+
+/api/roles/delete 需要权限验证
 
 删除角色
 
-需要权限验证
-/api/users/
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+name|string||必填|base64 加密
+funcids|string||必填|
+
+
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+
+/api/users/ 需要权限验证
 
 获取用户列表
 
-需要权限验证
-/api/users/add
+/api/users/add 需要权限验证
 
 新增用户
 
-需要权限验证
-/api/users/update
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+name|string||必填|base64 加密
+nickname|string||必填|base64 加密
+roleid|string||必填|
+account|string||必填|base64 加密
+email|string||可选|base64 加密
+password|string||可选|
+
+/api/users/update 需要权限验证
 
 修改用户
 
-需要权限验证
-/api/users/delete
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+name|string||必填|base64 加密
+nickname|string||必填|base64 加密
+roleid|string||必填|
+account|string||必填|base64 加密
+email|string||可选|base64 加密
+password|string||可选|
+
+/api/users/delete 需要权限验证
 
 删除用户
 
-需要权限验证
-/api/users/info
+参数|类型|描述|必填项|加密及方式
+:----|:-----:|-----:|-----:|-----:
+id|string||必填|
+
+/api/users/info 需要权限验证
 
 查看用户详细信息
-
-需要权限验证

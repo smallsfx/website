@@ -106,7 +106,7 @@
       _refresh_scroller();
     },
     /** 将登录信息JSON内容保存至COOKIE.
-     * @param json jsonObject 要保存的JSON内容,目前仅保存登录信息.
+     * @param {object} json 要保存的JSON内容,目前仅保存登录信息.
      */
     "saveCookie": function (json) {
       if (json == "") {
@@ -156,4 +156,4 @@
       loginedExecuteFuncs.push(func);
     }
   };
-} ();
+}();

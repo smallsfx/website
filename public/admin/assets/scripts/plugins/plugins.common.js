@@ -254,7 +254,6 @@
       }
     });
   }
-
   var edit_click = function () {
     var args = $(this).data("args");
     if (listbuffer && listbuffer.length > 0) {
@@ -263,7 +262,6 @@
       _open_editview();
     }
   }
-
   var reomve_click = function () {
     var primary = $(this).data("args");
     var confirmCallback = function (result) {

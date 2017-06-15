@@ -209,7 +209,7 @@ footer {
   color: #666666;
 }
 
-#content {
+#content ,#out-content{
   background-color: #f5f6f6;
   border-left: 1px solid #cdd2d2;
 }

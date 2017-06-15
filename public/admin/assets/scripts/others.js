@@ -3,7 +3,8 @@ var _initSite = function () {
   document.title = cfgs.app_name;
   jQuery.support.cors = true;
 };
-
+var leaveAction = undefined;
+var lastLeaveAction = undefined;
 /** 初始化菜单. */
 var _initMenu = function () {
   var container = $(".sidebar-menu-container");
@@ -99,6 +100,10 @@ var _initMenu = function () {
       a.attr("data-callback", module.callback);
     }
 
+    if (module.leave) {
+      a.attr("data-leave", module.leave);
+    }
+
     /**
      * 设置模块图标
      * 若模块图标未设置，则获取父级模块图标
@@ -106,7 +111,7 @@ var _initMenu = function () {
      */
 
     if (module.icon) {
-      if( module.icon != null){
+      if (module.icon != null) {
         $("<i/>").addClass(module.icon).appendTo(a);
       }
     } else if (parentModule.icon) {
@@ -193,6 +198,7 @@ var on_menu_click = function (sender, eventArgs) {
   //
   var url = sender.attr("href");
   var callback = sender.attr("data-callback");
+  var leave = sender.attr("data-leave");
   if (url == "javascript:;") {
     return;
   }
@@ -200,7 +206,7 @@ var on_menu_click = function (sender, eventArgs) {
     url = cfgs.listpage;
   }
   var text = $(".sub-menu-text", sender).text(); // 功能名称
-  if (callback != undefined) {
+  if (callback) {
     if (callback.indexOf("$P") >= 0) {
       callback = callback.replace("$P", "App.plugins") + ".init()";
     } else if (callback.indexOf("$D") >= 0) {
@@ -213,7 +219,20 @@ var on_menu_click = function (sender, eventArgs) {
     }
   }
 
-  App.logger.debug("菜单,href=" + url + ",data-callback=" + callback);
+  if (leave) {
+    if (leave.indexOf("$P") >= 0) {
+      leaveAction = leave.replace("$P", "App.plugins") + ".init()";
+    } else if (leave.indexOf("$D") >= 0) {
+      var args = leave.split("/");
+      leaveAction = "App.plugins.dict.Package('" + args[1] + "','" + text + "')";
+    } else if (leave.indexOf("$M") >= 0) {
+      leaveAction = leave.replace("$M", "App.modules") + "()";
+    } else {
+      leaveAction = leave + "()";
+    }
+  }
+
+  App.logger.debug("菜单,href=" + url + ",data-callback=" + callback + ",leave=" + leaveAction);
   if (eventArgs) {
     eventArgs.preventDefault();
   }
@@ -226,6 +245,11 @@ var on_menu_click = function (sender, eventArgs) {
   pageOptions.currentmenu = sender;
   pageOptions.currentmenu.parent().addClass("active");
   if (url) {
+    if (lastLeaveAction) {
+      eval(lastLeaveAction);
+      lastLeaveAction = undefined;
+    }
+    lastLeaveAction = leaveAction;
     App.form.load(url, callback);
   }
 };
