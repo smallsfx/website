@@ -1,6 +1,6 @@
 /* ========================================================================
 * App.modules.map v1.0
-* 0101.地图
+* 0101.高德地图
 * ========================================================================
 * Copyright 2016-2026 WangXin nvlbs,Inc.
 * ======================================================================== */
@@ -9,84 +9,54 @@
     app.modules.map = {};
   }
 
-
-  app.modules.map.initamap = function () {
-
+  var resizeMap = () => {
     var breadcrumbHeight = $(".content-header").outerHeight();
     var headerHeight = $("header").outerHeight();
     var windowHeight = $(window).outerHeight();
     var footerHeader = $("footer").outerHeight();
     var contentHeight = windowHeight - headerHeight - footerHeader;
     $("#out-content").next().hide();
-
     $("#out-content").append($("<div id='main-map'/>"));
     $("#main-map").height(contentHeight);
+  };
+
+  var google_domain = 'http://mt0.google.cn/vt/lyrs=';
+  // var google_domain = 'http://mt1.google.cn/vt/lyrs=';
+  // var google_domain = 'http://mt2.google.cn/vt/lyrs=';
+  // var google_domain = 'http://mt3.google.cn/vt/lyrs=';
+
+  // m：路线图  
+  // t：地形图  
+  // p：带标签的地形图  
+  // s：卫星图  
+  // y：带标签的卫星图  
+  // h：标签层（路名、地名等）
+  var map_type = 's';
+  var map_code = "110";
+  var map_language = 'zh-CN';
+  var map_gl = 'cn';
+
+  var google = google_domain + map_type + '@' + map_code + '&hl=' + map_language + '&gl=' + map_gl;
+  // var google = 'http://mt2.google.cn/vt/lyrs=s@110&hl=zh-CN&gl=cn';
+  // 地图：http://mt2.google.cn/vt/lyrs=m@177000000&hl=zh-CN&gl=cn
+  // 影像底图：http://mt3.google.cn/vt/lyrs=s@110&hl=zh-CN&gl=cn
+  // 影像底图：http://mt2.google.cn/vt/lyrs=s@727&hl=zh-CN&gl=cn
+
+  // 初始化地图
+  app.modules.map.initamap = function () {
+
+    $(window).on('resize', resizeMap);
+
+    resizeMap();
 
     AMapUI.loadUI(['control/BasicControl'], function (BasicControl) {
       var map;
-      // AMap.plugin(['AMap.IndoorMap'], function () {
-      //   //设定在没有矢量底图的时候也显示，默认情况下室内图仅在有矢量底图的时候显示
 
-      //   var layerCtrl2 = new BasicControl.LayerSwitcher({
-      //     // theme: 'dark',
-      //     position: 'lb',
-      //     //自定义基础图层
-      //     baseLayers: [{
-      //       id: 'tile',
-      //       name: '栅格图层',
-      //       layer: new AMap.TileLayer()
-      //     }, {
-      //       enable: true,
-      //       id: 'satellite',
-      //       name: '卫星图层',
-      //       layer: new AMap.TileLayer.Satellite()
-      //     }
-      //     ],
-      //     //自定义覆盖图层
-      //     overlayLayers: [{
-      //       enable: true,
-      //       id: 'traffic',
-      //       name: '交通路况',
-      //       layer: new AMap.TileLayer.Traffic()
-      //     }, {
-      //       id: 'roadNet',
-      //       name: '交通路网',
-      //       layer: new AMap.TileLayer.RoadNet()
-      //     }, {
-      //       id: 'build',
-      //       name: "3D建筑",
-      //       layer: new AMap.Buildings()
-      //     }, {
-      //       id: 'indoor',
-      //       name: '室内地图',
-      //       layer: new AMap.IndoorMap({ alwaysShow: true })
-      //     }]
-      //   });
-      var map = new AMap.Map('main-map', {
-        resizeEnable: true,
-        zoom: 18,
-        center: [116.397428, 39.90923],
-        //这里将layerCtrl中启用的图层传递给map
-        // layers: layerCtrl2.getEnabledLayers()
-        defaultLayer: new AMap.TileLayer.Satellite()
-      });
-      // map.defaultLayer
-      // var layer = new AMap.TileLayer.Satellite({ map: map });
-      // map.defaultLayer.on('complate', function () {
-      //   console.log("layer - complated");
-      // });
-      var google = 'http://mt2.google.cn/vt/lyrs=s@727&hl=zh-CN&gl=cn';
-      // indoorMap.showIndoorMap('B000A856LJ');
-      // map.getLayers()[0].on('complate', function () {
-      //   console.log("layer - complated");
-      // });
-
-      map.on("moveend", function () {
+      var replaceImg = () => {
         var zoom = map.getZoom();
         if (zoom < 14) {
           return;
         }
-        // console.log(zoom);
         $(".amap-satellite>img").each(function (index, item) {
           var src = item.src;
 
@@ -98,38 +68,78 @@
             item.src = google + args;
           }
         });
+      };
+
+      var layerCtrl2 = new BasicControl.LayerSwitcher({
+        // theme: 'dark',
+        position: 'rt',
+        //自定义基础图层
+        baseLayers: [{
+          id: 'tile',
+          name: '栅格图层',
+          layer: new AMap.TileLayer()
+        }, {
+          enable: true,
+          id: 'satellite',
+          name: '卫星图层',
+          layer: new AMap.TileLayer.Satellite()
+        }
+        ],
+        //自定义覆盖图层
+        overlayLayers: [{
+          enable: true,
+          id: 'traffic',
+          name: '交通路况',
+          layer: new AMap.TileLayer.Traffic()
+        }, {
+          id: 'roadNet',
+          name: '交通路网',
+          layer: new AMap.TileLayer.RoadNet()
+        }, {
+          id: 'build',
+          name: "3D建筑",
+          layer: new AMap.Buildings()
+        }, {
+          id: 'ImageLayer',
+          name: "ImageLayer",
+          layer: new AMap.ImageLayer()
+        }
+          // , {
+          //   id: 'indoor',
+          //   name: '室内地图',
+          //   layer: new AMap.IndoorMap({ alwaysShow: true })
+          // }
+        ]
+      });
+
+      // layerCtrl2.on('layerPropChanged', function (e) {
+
+      //   if (e.layer.id == "satellite" && layer.props.enable) {
+      //     setTimeout(replaceImg, 2000);
+      //   }
+      // });
+
+      var map = new AMap.Map('main-map', {
+        resizeEnable: true,
+        layers: layerCtrl2.getEnabledLayers()
       });
 
       map.setCity("铁岭");
-      // map.addControl(layerCtrl2);
+      map.addControl(layerCtrl2);
 
-      // // 路况
-      // var traffic = new BasicControl.Traffic({
-      //   showButton: true,
-      //   position: 'lt',
-      //   theme: 'normal'
-      // });
-      // map.addControl(traffic);
-      // 图层控制
-      // map.plugin(["AMap.MapType"], function () {
-      //   //地图类型切换
-      //   var type = new AMap.MapType({
-      //     defaultType: 0 //使用2D地图 
-      //   });
-      //   map.addControl(type);
-      // });
+      map.on("dragging", replaceImg);
+      map.on("moveend", function () {
+        replaceImg();
+        // 2秒后再次验证是否全部替换
+        setTimeout(replaceImg, 2000);
+      });
 
-      // //加载鹰眼
-      // map.plugin(["AMap.OverView"], function () {
-      //   view = new AMap.OverView();
-      //   map.addControl(view);
-      // });
       // 比例尺
       map.plugin(["AMap.Scale"], function () {
         var scale = new AMap.Scale();
         map.addControl(scale);
       });
-
+      // 工具栏
       map.plugin(["AMap.ToolBar"], function () {
         //加载工具条 
         var tool = new AMap.ToolBar();
@@ -138,14 +148,12 @@
 
     });
 
-
-    // });
-
-
   };
+  // 卸载地图
   app.modules.map.deinitamap = function () {
+
+    $(window).off('resize', resizeMap);
     $("#out-content").empty();
-    // $("#out-content").attr("style","");
     $("#out-content").next().show();
   }
 })(App);

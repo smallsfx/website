@@ -114,10 +114,11 @@
     return format;
   }
   var utcToCN = (timestamp) => {
+    var result = undefined;
     var minute = 1000 * 60;
     var hour = minute * 60;
     var day = hour * 24;
-    var halfamonth = day * 15;
+    // var halfamonth = day * 15;
     var month = day * 30;
     var now = new Date().getTime();
     var diffValue = now - timestamp * 1000;

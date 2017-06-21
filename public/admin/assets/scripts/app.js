@@ -1,6 +1,7 @@
 ﻿var App = function () {
   // 系统运行后自动运行的方法集合
   var loginedExecuteFuncs = [];
+  var isFullScreen = false;
   /** 重新设置滚动条 */
   var _refresh_scroller = function () {
     var breadcrumbHeight = $(".content-header").outerHeight();
@@ -12,7 +13,7 @@
     var newOptions, options;
 
     var height = windowHeight - headerHeight - footerHeader;
-
+    $("#content").css('height', height + 'px');
     // 处理导航栏滚动条显示状态
     if (sidebarHeight <= $(".sidebar-menu").height()) {
       newOptions = { height: sidebarHeight };
@@ -20,8 +21,8 @@
       $(".sidebar-menu").slimScroll(options);
       $(".sidebar-menu").css("height", sidebarHeight + "px");
     } else {
-      $("#sidebar").append($(".sidebar-menu"));
-      $("#sidebar>.slimScrollDiv").remove();
+      $(".sidebar").append($(".sidebar-menu"));
+      $(".sidebar>.slimScrollDiv").remove();
       $(".sidebar-menu").removeAttr("style");
     }
     // 处理内容区滚动条显示状态
@@ -39,7 +40,80 @@
       $("#content-container").removeAttr("style");
       $("#content-container").height(contentHeight);
     }
+
+    $("select:not(.monthselect,.yearselect)").each(function () {
+      var selectvalue = $(this).attr("data-value");
+      var ismulit = $(this).attr("data-mulit");
+      $(this).select2(cfgs.options.select2)
+      if (selectvalue) {
+        if (ismulit) {
+          $(this).val(selectvalue.split(",")).trigger("change");
+        } else {
+          $(this).val(selectvalue).trigger("change");
+        }
+      } else {
+        $(this).val(null).trigger("change");
+      }
+    });
   }
+
+  document.addEventListener("fullscreenchange", function () {
+    //    (document.fullscreen) ? "" : "not ";
+    _refresh_scroller();
+  }, false);
+  document.addEventListener("mozfullscreenchange", function () {
+    // (document.mozFullScreen) ? "" : "not ";
+    _refresh_scroller();
+  }, false);
+  document.addEventListener("webkitfullscreenchange", function () {
+    // (document.webkitIsFullScreen) ? "" : "not ";
+    _refresh_scroller();
+  }, false);
+  document.addEventListener("msfullscreenchange", function () {
+    // (fullscreenState.innerHTML = ()document.msFullscreenElement) ? "" : "not ";
+    _refresh_scroller();
+  }, false);
+
+  var fullScreen = () => {
+    var docElm = document.documentElement;
+    //W3C  
+    if (docElm.requestFullscreen) {
+      isFullScreen = true;
+      docElm.requestFullscreen();
+    }
+    //FireFox  
+    else if (docElm.mozRequestFullScreen) {
+      isFullScreen = true;
+      docElm.mozRequestFullScreen();
+    }
+    //Chrome等  
+    else if (docElm.webkitRequestFullScreen) {
+      isFullScreen = true;
+      docElm.webkitRequestFullScreen();
+    }
+    //IE11
+    else if (docElm.msRequestFullscreen) {
+      isFullScreen = true;
+      docElm.msRequestFullscreen();
+    }
+  }
+
+  var exitFullScreen = () => {
+    if (document.exitFullscreen) {
+      isFullScreen = false;
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      isFullScreen = false;
+      document.mozCancelFullScreen();
+    } else if (document.webkitCancelFullScreen) {
+      isFullScreen = false;
+      document.webkitCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      isFullScreen = false;
+      document.msExitFullscreen();
+    }
+  }
+
   return {
     /** 应用入口. */
     "onReady": function () {
@@ -57,13 +131,19 @@
       $(".sys-changeinfo").on("click", function () {
         App.route.changeinfo();
       });
-
+      $('#tools-screen').on('click', function () {
+        if (isFullScreen) {
+          exitFullScreen();
+        } else {
+          fullScreen();
+        }
+      });
       if (!App.readCookie()) {
         App.logger.info("TOKEN验证失败,重新登录");
-        App.route.gotoLogin();/*不存在token或token失效，需重新登录*/
+        App.route.gotoLogin(); /*不存在token或token失效，需重新登录*/
       } else {
         App.logger.info("TOKEN验证成功,进入系统");
-        App.route.gotoMain();/*token有效，可正常使用系统*/
+        App.route.gotoMain(); /*token有效，可正常使用系统*/
       }
     },
     /** 初始化应用框架. */
@@ -91,7 +171,8 @@
     },
     /** */
     "getViewPort": function () {
-      var e = window, a = "inner";
+      var e = window,
+        a = "inner";
       if (!("innerWidth" in window)) {
         a = "client";
         e = document.documentElement || document.body;
@@ -156,4 +237,5 @@
       loginedExecuteFuncs.push(func);
     }
   };
+
 }();
