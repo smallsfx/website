@@ -11,7 +11,7 @@
    * @param {string} text  日志内容
    */
   var output = function (level, text) {
-    // console.trace();
+
     if (cfgs.output) {
       var date = App.util.dateformat(new Date(), "yyyy-MM-dd HH:mm:ss");
       if (level == "INFO ") {
@@ -25,6 +25,7 @@
       } else {
         console.log(date + " [" + level + "] " + text);
       }
+      // console.trace(date + " [" + level + "] " + text);
     }
   }
   /// <field type="logger">日志记录器对象.</field> 
@@ -33,29 +34,33 @@
      * @param {string} text  日志内容
      */
     "debug": function (text) {
-      if (cfgs.output.debug) {
-        output("DEBUG", text);
+        if (cfgs.output.debug) {
+          output("DEBUG", text);
+        }
       }
-    }/**以WARN级别输出内容
-     * @param {string} text  日志内容
-     */
-    , "warn": function (text) {
-      if (cfgs.output.warn) {
-        output("WARN ", text);
+      /**以WARN级别输出内容
+       * @param {string} text  日志内容
+       */
+      ,
+    "warn": function (text) {
+        if (cfgs.output.warn) {
+          output("WARN ", text);
+        }
       }
-    }
-    /**以INFO级别输出内容
-     * @param {string} text  日志内容
-     */
-    , "info": function (text) {
-      if (cfgs.output.info) {
-        output("INFO ", text);
+      /**以INFO级别输出内容
+       * @param {string} text  日志内容
+       */
+      ,
+    "info": function (text) {
+        if (cfgs.output.info) {
+          output("INFO ", text);
+        }
       }
-    }
-    /**以ERROR级别输出内容
-     * @param {string} text  日志内容
-     */
-    , "error": function (text) {
+      /**以ERROR级别输出内容
+       * @param {string} text  日志内容
+       */
+      ,
+    "error": function (text) {
       if (cfgs.output.error) {
         output("ERRPR", text);
       }

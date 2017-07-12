@@ -1,16 +1,16 @@
 /** 初始化站点设置. */
-var _initSite = function() {
+var _initSite = function () {
     document.title = cfgs.app_name;
     jQuery.support.cors = true;
 };
 var leaveAction = undefined;
 var lastLeaveAction = undefined;
 /** 初始化菜单. */
-var _initMenu = function() {
+var _initMenu = function () {
     var container = $(".sidebar-menu-container");
     container.empty();
 
-    var createTag = function(text) {
+    var createTag = function (text) {
         switch (text) {
             case "new":
                 return $("<span />").text("NEW").addClass("badge btn-danger");
@@ -28,7 +28,7 @@ var _initMenu = function() {
         cfgs.root = [];
     }
 
-    $.each(functions, function(index, item) {
+    $.each(functions, function (index, item) {
         var li, a, span, parentItem, parentA;
         var functionID = item;
         var module = cfgs.modules[functionID]; // 获取系统功能模块
@@ -62,7 +62,7 @@ var _initMenu = function() {
             span = $("<span/>").text(parentModule.name).addClass("menu-text").appendTo(a);
 
             if (parentModule.tags) {
-                $.each(parentModule.tags, function(tindex, titem) {
+                $.each(parentModule.tags, function (tindex, titem) {
                     createTag(titem).appendTo(span);
                 });
             }
@@ -121,7 +121,7 @@ var _initMenu = function() {
         span = $("<span/>").text(module.name).appendTo(a);
 
         if (module.tags) {
-            $.each(module.tags, function(tindex, titem) {
+            $.each(module.tags, function (tindex, titem) {
                 createTag(titem).appendTo(span);
             });
         }
@@ -133,14 +133,14 @@ var _initMenu = function() {
     });
 
     // 注册导航栏一级菜单点击事件
-    $(".sidebar-menu .has-sub > a").click(function() {
+    $(".sidebar-menu .has-sub > a").click(function () {
         var isOpen = $(this).parent().hasClass("open");
         var last = $(".has-sub.open", $(".sidebar-menu"));
         last.removeClass("open");
         $(".arrow", last).removeClass("open");
         // var thisElement = $(this);
         //菜单收起展开动画完成后执行
-        var slidComplated = function() {
+        var slidComplated = function () {
             App.contentChanged();
         }
         var sub = $(this).next();
@@ -156,7 +156,7 @@ var _initMenu = function() {
     });
 
     // 注册导航栏收起/展开开关点击事件
-    $(".sidebar-collapse").click(function() {
+    $(".sidebar-collapse").click(function () {
         if ($("body").hasClass("mini-menu")) {
             $("body").removeClass("mini-menu");
         } else {
@@ -165,7 +165,7 @@ var _initMenu = function() {
     });
 
     // 注册菜单点击事件
-    $(".sidebar-menu-container").on("click", "a", function(e) {
+    $(".sidebar-menu-container").on("click", "a", function (e) {
         on_menu_click($(this), e);
     });
 
@@ -180,7 +180,7 @@ var _initMenu = function() {
 }
 
 /** Sidebar事件注册 */
-var handleSidebar = function() {
+var handleSidebar = function () {
 
 }
 
@@ -188,7 +188,7 @@ var handleSidebar = function() {
  * @param sender 按钮对象.
  * @param eventArgs 事件参数.
  */
-var on_menu_click = function(sender, eventArgs) {
+var on_menu_click = function (sender, eventArgs) {
     var url = sender.attr("href");
     var callback = sender.attr("data-callback");
     var leave = sender.attr("data-leave");
@@ -198,7 +198,7 @@ var on_menu_click = function(sender, eventArgs) {
     if (url == "#") {
         url = cfgs.listpage;
     }
-    var text = $(".sub-menu-text", sender).text(); // 功能名称
+    var text = sender.text(); //$(".sub-menu-text", sender).text(); // 功能名称
     if (callback) {
         if (callback.indexOf("$P") >= 0) {
             callback = callback.replace("$P", "App.plugins") + ".init()";
@@ -250,10 +250,10 @@ var on_menu_click = function(sender, eventArgs) {
 /** 按照目录层级,自动打开页面.
  * @param path 导航路径.
  */
-var auto_navigation = function(path) {
-    var doNavigation = function() {
+var auto_navigation = function (path) {
+    var doNavigation = function () {
         var container = $(".sidebar-menu-container");
-        $.each(path, function(index, item) {
+        $.each(path, function (index, item) {
             var span = container.find("span:contains(\"" + item + "\")");
             var link = span.parent();
             var li = link.parent();
@@ -264,7 +264,7 @@ var auto_navigation = function(path) {
             } else {
                 li.addClass("active");
                 pageOptions.currentmenu = li.find("a");
-                li.parent().slideDown(200, function() {
+                li.parent().slideDown(200, function () {
                     on_menu_click(pageOptions.currentmenu);
                 });
             }

@@ -16,7 +16,9 @@
     $("#content").css('height', height + 'px');
     // 处理导航栏滚动条显示状态
     if (sidebarHeight <= $(".sidebar-menu").height()) {
-      newOptions = { height: sidebarHeight };
+      newOptions = {
+        height: sidebarHeight
+      };
       options = $.extend(cfgs.options.scroller, newOptions);
       $(".sidebar-menu").slimScroll(options);
       $(".sidebar-menu").css("height", sidebarHeight + "px");
@@ -30,7 +32,9 @@
     // App.logger.debug("contentHeight=" + contentHeight);
     // App.logger.debug("ajax-content=" + $("#ajax-content").parent().height());
     if (contentHeight < 800 || $("#ajax-content").parent().height() > contentHeight) {
-      newOptions = { height: contentHeight };
+      newOptions = {
+        height: contentHeight
+      };
       options = $.extend(cfgs.options.scroller, newOptions);
       $("#content-container").slimScroll(options);
       $("#content-container").css("height", contentHeight + "px");
@@ -117,6 +121,7 @@
   return {
     /** 应用入口. */
     "onReady": function () {
+      console.groupCollapsed();
       App.logger.info("应用程序启动");
       /* 注册按钮事件 */
       $(".sys-logout").on("click", function () {
@@ -222,7 +227,9 @@
     /** 将页面内容滚动到指定位置. */
     "scrollTo": function (el, offeset) {
       pos = (el && el.size() > 0) ? el.offset().top : 0;
-      $("html,body").animate({ scrollTop: pos + (offeset ? offeset : 0) }, "slow");
+      $("html,body").animate({
+        scrollTop: pos + (offeset ? offeset : 0)
+      }, "slow");
     },
     /** 当前登录用户的信息 */
     "userinfo": {},
