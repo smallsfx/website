@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <i class="fa fa-cogs"></i> 计划任务管理
+</div>
+<div class="modal-body">
+    <div class="row">
+        <form class="form-horizontal form-border">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">计划任务名称:</label>
+                <div class="col-sm-9">
+                    <input id="taskname" class="form-control" type="text" placeholder="输入计划任务名称...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">计划终止时间:</label>
+                <div class="col-sm-9">
+                    <input id="date" type="text" class="form-control form_datetime" placeholder="选择计划终止时间...">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <button data-type="1" class="treetype btn green btn-block">桥梁</button>
+                </div>
+                <div class="col-sm-4">
+                    <button data-type="2" class="treetype btn default btn-block">隧道</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <div id="treeBridge" data-height="330" data-rail-visible="true"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-2">
+                    <button class="btn blue btn-block">确定</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn yellow btn-block">返回</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

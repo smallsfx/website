@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <i class="fa fa-cogs"></i> 桥检计划查询
+</div>
+<a class="model-colse" data-dismiss="modal" aria-hidden="true">X</a>
+<div class="modal-body">
+  <div class="row">
+    <form id="role-form" method="post" class="form-horizontal">
+      <label class="col-xs-1 control-label">计划名称</label>
+      <div class="col-xs-3">
+        <input class="form-control" type="text" id="name" name="name" placeholder="请输入计划名称...">
+      </div>
+      <label class="col-xs-1 control-label">开始时间</label>
+      <div class="col-xs-3">
+        <input id="begindate" type="text" class="form-control form_datetime" placeholder="选择开始时间...">
+      </div>
+
+      <label class="col-xs-1 control-label">结束时间</label>
+      <div class="col-xs-3">
+        <input id="enddate" type="text" class="form-control form_datetime" placeholder="选择结束时间...">
+      </div>
+    </form>
+  </div>
+  <div class="row pull-right">
+    <a class="insert" href="javascript:;"> <i class="icon-user"></i> 新增 </a>
+    <a class="refresh" href="javascript:;"> <i class="icon-refresh"></i> 刷新 </a>
+  </div>
+  <div class="table-scrollable">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>计划任务名称</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>

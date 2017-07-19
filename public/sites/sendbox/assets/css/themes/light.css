@@ -1,0 +1,246 @@
+body {
+  background-color: #FFFFFF;
+}
+
+header {
+  background-color: #0096ff;
+}
+
+header>ul>li ul {
+  box-shadow: 5px 5px rgba(102, 102, 102, 0.1);
+}
+
+
+/*主菜单 - 导航 - 文字颜色 - 固定 - 白色*/
+
+header>ul>li>a,
+header>ul>li>a>i,
+header>ul>li ul>li>a,
+header>ul>li ul>li>a>i {
+  color: #fff !important;
+}
+
+header>ul ul ul,
+header>ul>li.open ul ul {
+  display: none;
+  margin-left: 140px;
+  margin-top: -30px;
+}
+
+header>ul>li ul>li.open ul {
+  display: block;
+}
+
+header>ul>li:hover>a,
+header>ul>li:hover>a>i {
+  color: #000;
+}
+
+header>ul>li ul>li {
+  color: #eee;
+  border-top: 1px solid #ccc;
+}
+
+header>ul>li ul>li:hover {
+  background-color: #0096ff;
+}
+
+header ul>li>ul>li>a>.tag {
+  background-color: #cc0000;
+  border: 1px solid #fff;
+  color: #eee;
+}
+
+header>ul>li ul>li>input {
+  color: #eee;
+}
+
+.search .form-control {
+  color: #fff;
+  background: transparent none repeat scroll 0 0 !important;
+}
+
+header,
+footer {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.datetimepicker .switch {
+  color: #333 !important;
+}
+
+.switch,
+.switch:hover,
+.switch:focus {
+  color: #fff;
+}
+
+.tag-container>ul>li.checked>a>i {
+  color: #fff !important;
+}
+
+.switch.yellow>.switch-bg,
+.switch.yellow>.switch-td,
+.tag-container ul>li.yellow>a>.icon,
+header>ul>li ul>li.yellow>a>.icon {
+  background-color: #ffcc00 !important;
+}
+
+.switch.green>.switch-bg,
+.switch.green>.switch-td,
+.tag-container>ul>li.green>a>.icon,
+header>ul>li ul>li.green>a>.icon {
+  background-color: #008000 !important;
+}
+
+.switch.red>.switch-bg,
+.switch.red>.switch-td,
+.tag-container>ul>li.red>a>.icon,
+header>ul>li ul>li.red>a>.icon {
+  background-color: #cc0000;
+}
+
+.switch.blue>.switch-bg,
+.switch.blue>.switch-td,
+.tag-container>ul>li.blue>a>.icon,
+header>ul>li ul>li.blue>a>.icon {
+  background-color: #0099CC;
+}
+
+.switch.gray>.switch-bg,
+.switch.gray>.switch-td,
+.tag-container>ul>li.gray>a>.icon,
+header>ul>li ul>li.gray>a>.icon {
+  background-color: #666;
+}
+
+header>ul>li ul>li>a>.icon {
+  border: solid 1px #fff;
+}
+
+.switch>.switch-bg,
+.switch>.switch-td {
+  border: solid 1px #fff;
+}
+
+.search .input-group-btn>a>i {
+  color: #fff;
+}
+
+.search .input-group-btn>a:hover>i {
+  color: #0096ff;
+}
+
+.search .form-control::-moz-placeholder {
+  color: #eee !important;
+}
+
+.search .form-control:-ms-input-placeholder {
+  color: #eee !important;
+}
+
+.search .form-control::-webkit-input-placeholder {
+  color: #eee !important;
+}
+
+.switch.first>.switch-td {
+  background-color: #666;
+}
+
+.switch.first.open>.switch-td {
+  background-color: #0096ff;
+}
+
+footer,
+.page-container {
+  background-color: #fff;
+}
+
+
+/*footer>ul>li.open{
+  background-color:#0096ff;
+}*/
+
+header>ul>li ul,
+footer,
+.sider-form,
+.sider-form>.sider-form-title,
+.tag-container {
+  color: #fff;
+  background-color: transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#28000000, endColorstr=#28000000);
+  background: transparent;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.sider-form>.sider-form-title>span,
+.sider-form>.sider-form-body {
+  color: #fff;
+}
+
+.disease-container>li,
+.checklog-container>li,
+.sider-form>.sider-form-body .row {
+  border-bottom: solid 1px #ccc;
+}
+
+.disease-container>li:last-child,
+.checklog-container>li:last-child {
+  border-bottom: none;
+}
+
+.disease>.disease-icon {
+  border: solid 1px #fff;
+}
+
+.report-header {
+  border-bottom: solid 1px #ddd;
+}
+
+.report-header>.form-group>div {
+  border-right: solid 1px #ddd;
+}
+
+.report-header>.form-group>div>div:first-child {
+  color: #0096ff;
+}
+
+.l1 {
+  background-color: #ffcc00;
+}
+
+.l2 {
+  background-color: #ffad33;
+}
+
+.l3 {
+  background-color: #ff9900;
+}
+
+.l4 {
+  background-color: #ff3300;
+}
+
+.l5 {
+  background-color: #cc0000
+}
+
+.model-colse {
+  background-color: red;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.modal {
+  background-color: transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff, endColorstr=#7fffffff);
+  background: transparent;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.task .modal {
+  background-color: #fff !important;
+  filter: none !important;
+}

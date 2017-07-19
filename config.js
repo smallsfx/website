@@ -10,7 +10,7 @@ exports.config = {
     "rootPath": rootPath,
     /** 目录结构定义 */
     "catalog": {
-        "upload": "public/avatar/", // 上传文件存放目录
+        "upload": "public/resource/avatar/", // 上传文件存放目录
         "request-handler": "lib/request-handlers", // request-handler 存放目录
         "server-handler": "lib/server-handlers", // server-handler 存放目录
         "controller": "lib/controllers", // controller 存放目录

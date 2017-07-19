@@ -1,0 +1,483 @@
+<style>
+	#LOADING_GREY_DIV {
+		display: none;
+		background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0 !important;
+		filter: Alpha(opacity=40);
+		width: 100%;
+		height: 100%;
+		background-color: #999999;
+		position: absolute;
+		z-index: 44;
+	}
+	
+	#LOADING_DIV {
+		position: absolute;
+		display: none;
+		z-index: 45;
+	}
+	
+	#MAIN_DIV {
+		text-align: center;
+		width: 100%;
+	}
+	
+	#LOG_DIV_BODY {
+		z-index: -1;
+		width: 400px;
+		height: 200px;
+		right: 20px;
+		bottom: 0;
+		position: fixed;
+		display: none;
+	}
+	
+	
+	#prompt_div {
+		background-color: White;
+		border: 1px solid black;
+		width: 500px;
+		height: 300px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 35%;
+		display: none;
+	}
+
+	#prompt_div_BR {
+		border-top: 1px solid #CCCCCC;
+		height: 45px;
+		margin: 40px 10px 10px 10px;
+		width: 480px;
+		text-align: right;
+	}
+	
+	#prompt_div_BR a {
+		font-size: 12px;
+		color: Blue;
+	}
+	
+	#prompt_div_btn_load {
+		width: 110px;
+		height: 35px;
+		line-height: 35px;
+		color: White;
+		border: 1px solid #915700;
+		background-color: #ff8100;
+		margin-left: auto;
+		margin-right: auto;
+		cursor: pointer;
+	}
+	
+	#prompt_div_line1 {
+		height: 70px;
+		line-height: 70px;
+		font-size: 12px;
+		color: #999999;
+		text-align: center;
+	}
+	
+	#prompt_div_line2 {
+		height: 60px;
+		line-height: 50px;
+		color: #FF9900;
+		font-size: 14px;
+		font-weight: bolder;
+	}
+	
+	#prompt_div_headline1 {
+		font-size: 15px;
+		width: 100px;
+		height: 50px;
+		line-height: 60px;
+		text-align: center;
+		float: left;
+	}
+	
+	#prompt_div_headline2 {
+		font-size: 12px;
+		width: 38px;
+		height: 50px;
+		line-height: 60px;
+		text-align: center;
+		float: right;
+		cursor: pointer;
+	}
+
+	.wordage {
+		font-size: 15px;
+		width: 320px;
+		height: 40px;
+		line-height: 40px;
+	}
+	
+	#Btn_div {
+		width: 320px;
+		height: 55px;
+	}
+	
+	#cutoff_div {
+		height: 5px;
+		border-bottom: 1px solid black;
+		margin: 0px 5px 0px 5px;
+	}
+	
+	.Btn {
+		background-color: #E6E6E6;
+		margin: 10px 20px 20px 20px;
+		width: 80px;
+		height: 25px;
+		line-height: 25px;
+		text-align: center;
+		font-size: 15px;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+	
+	#setting_div {
+		width: 320px;
+		height: 78px;
+		display: none;
+	}
+	
+	#setting_div_input {
+		font-size: 13px;
+		text-align: left;
+		padding-top: 18px;
+		padding-left: 20px;
+		border-top: 1px solid black;
+	}
+	
+	#EnterRoomBtn {
+		width: 40px;
+		text-align: center;
+		cursor: pointer;
+		border: 1px solid black;
+		background-color: #E6E6E6;
+	}
+	
+	#advancedsetting {
+		cursor: pointer;
+		background-color: #E6E6E6;
+		height: 25px;
+		width: 80px;
+		border: 1px solid black;
+		text-align: center;
+		margin: 10px auto 0px auto;
+	}
+	
+	#ExitSystemBtn {
+		float: right;
+		margin-right: 15px;
+		margin-top: 3px;
+		cursor: pointer;
+		font-size: 13px;
+	}
+
+	#room_div_otherobject {
+		width: 768px;
+		height: 556px;
+		overflow: hidden;
+	}
+	
+	#ANYCHAT-VIDEO-LOCAL {
+		width: 195px;
+		height: 147px;
+		float: left;
+		margin: 0 auto;
+	}
+	
+	#ANYCHAT-VIDEO-REMOTE {
+		width: 464px;
+		height: 348px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	
+	#AnyChatRemoteVideoDiv {
+		width: 768px;
+		height: 548px;
+		text-align: center;
+	}
+	
+	#leaveroom {
+		float: right;
+		font-size: 13px;
+		margin-right: 15px;
+		margin-top: 10px;
+		cursor: pointer;
+	}
+
+	#room_div_close {
+		width: 750px;
+		height: 25px;
+	}
+	
+	#room_div_right_MsgTxt {
+		width: 325px;
+		height: 40px;
+		padding-top: 10px;
+		float: left;
+	}
+	
+	#RemoteAudioVolume {
+		width: 0px;
+		height: 6px;
+		background-color: #00FF00;
+	}
+	
+	#LocalAudioVolume {
+		width: 0px;
+		height: 6px;
+		background-color: #00FF00;
+	}
+	
+	.TheMsgStyle {
+		text-align: left;
+		font-size: 12px;
+		padding-left: 15px;
+	}
+	
+	.UserListStyle {
+		text-align: left;
+		font-size: 12px;
+		padding-left: 15px;
+		height: 20px;
+		overflow: hidden;
+	}
+	
+	#advanceset_div {
+		margin: -220px 0px 0px 600px;
+		display: none;
+		width: 500px;
+		height: 210px;
+		position: absolute;
+		background-color: #E6E6E6;
+		border: 1px solid black;
+		z-index: 43;
+	}
+	
+	#advanceset_div_close {
+		cursor: pointer;
+		text-align: right;
+		padding: 5px 5px 0px 0px;
+		font-size: 12px;
+	}
+	
+	#Btn_Div_Device {
+		font-size: 14px;
+		cursor: pointer;
+		background-color: White;
+		float: left;
+		height: 25px;
+		width: 70px;
+		text-align: center;
+		margin: 5px 0px 0px 0px;
+	}
+	
+	.Btn_Div {
+		font-size: 14px;
+		cursor: pointer;
+		background-color: #9CAAC1;
+		float: left;
+		height: 25px;
+		width: 70px;
+		text-align: center;
+		margin: 5px 0px 0px 0px;
+	}
+	
+	#advanceset_div_mainpark {
+		margin: 0px 20px 20px 20px;
+		width: 464px;
+		height: 170px;
+	}
+	
+	#advanceset_div_Div_Btn {
+		width: 360px;
+		height: 30px;
+	}
+	
+	#advanceset_div_mainpark_parameter {
+		background-color: White;
+		width: 464px;
+		height: 135px;
+		font-size: 14px;
+	}
+	
+	#Device_Interface {
+		line-height: 35px;
+		margin-left: 60px;
+		width: 340px;
+		height: 115px;
+	}
+	
+	#Video_Parameter_Interface {
+		display: none;
+		margin-left: 60px;
+		width: 340px;
+		height: 115px;
+	}
+	
+	#advanceset_div_Tab {
+		width: 340px;
+		height: 115px;
+		font-size: 12px;
+	}
+	
+	#advanceset_div_Tab a {
+		color: #999999;
+	}
+	
+	.td_input {
+		text-align: right;
+	}
+	
+	#regulate {
+		cursor: pointer;
+		text-align: center;
+		line-height: 20px;
+		width: 70px;
+		height: 20px;
+		border: 1px solid black;
+	}
+	
+	#apply_changes {
+		cursor: pointer;
+		text-align: center;
+		line-height: 20px;
+		width: 70px;
+		height: 20px;
+		border: 1px solid black;
+	}
+	
+	#Sound_Parameter_Interface {
+		display: none;
+		margin-left: 60px;
+		width: 340px;
+		height: 115px;
+	}
+	
+	.audio_tabcontrol {
+		width: 170px;
+		height: 30px;
+		line-height: 30px;
+		float: left;
+		text-align: center;
+	}
+	
+	#Other_Parameter_Interface {
+		display: none;
+		margin-left: 60px;
+		width: 340px;
+		text-align: center;
+		height: 115px;
+		line-height: 115px;
+	}
+</style>
+<!--操作等待层 -->
+<div id="LOADING_DIV"><img src="./images/LoadImg.gif" alt="请等待..." style=" height:50px;" /></div>
+<!--灰色背景透明层 -->
+<div id="LOADING_GREY_DIV"></div>
+<!--所有界面与浏览器顶部距离层 -->
+<div id="margintop"></div>
+<div id="MAIN_DIV">
+	<!--安装插件提示层 -->
+	<div id="prompt_div">
+		<div class="close_div">
+			<div id="prompt_div_headline1">插件安装提示</div>
+			<div id="prompt_div_headline2">刷新</div>
+		</div>
+		<div>
+			<div id="prompt_div_line1"></div>
+			<div id="prompt_div_line2">控件安装完成后，请重启浏览器</div>
+			<div id="prompt_div_btn_load" onclick="window.open('http://anychat.oss-cn-hangzhou.aliyuncs.com/AnyChatWebSetup.exe')">下载安装</div>
+		</div>
+		<div style="height: 85px;">
+			<div id="prompt_div_BR">
+				<a href="http://www.anychat.cn/">AnyChat</a>&nbsp|&nbsp<a href="http://www.bairuitech.com/">佰锐科技</a>
+			</div>
+		</div>
+	</div>
+	<!--房间界面 -->
+	<div id="room_div">
+		<div style="padding:10px 20px 10px 20px;">
+			<div id="room_div_right">
+				<div id="room_div_otherobject" style="text-align:center;">
+					<div id="AnyChatRemoteVideoDiv" style="margin:0 auto;"></div>
+					<div style="width:768px; height:4px; text-align:left;">
+						<div id="RemoteAudioVolume"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--高级设置界面 -->
+	<div id="advanceset_div">
+		<div id="advanceset_div_mainpark">
+			<div id="advanceset_div_Div_Btn">
+				<div id="Btn_Div_Device" clickstate="true" onclick="selectSettingMenu( 'Device_Interface','Btn_Div_Device')">设备选择</div>
+				<div id="Btn_Div_Video" class="Btn_Div" clickstate="false" onclick="selectSettingMenu('Video_Parameter_Interface', 'Btn_Div_Video')">视频参数</div>
+				<div id="Btn_Div_Sound" class="Btn_Div" clickstate="false" onclick="selectSettingMenu('Sound_Parameter_Interface', 'Btn_Div_Sound')">音频参数</div>
+				<div id="Btn_Div_Other" class="Btn_Div" clickstate="false" onclick="selectSettingMenu('Other_Parameter_Interface', 'Btn_Div_Other')">其他设置</div>
+			</div>
+			<div id="advanceset_div_mainpark_parameter">
+				<div style="height:10px;"></div>
+				<div id="Device_Interface">
+					视频设备：<select id="DeviceType_VideoCapture" onchange="GetTheValue( 'DeviceType_VideoCapture')" style=" width:250px;"></select><br
+					/> 录音设备：
+					<select id="DeviceType_AudioCapture" onchange="GetTheValue( 'DeviceType_AudioCapture')" style=" width:250px;"></select><br
+					/> 放音设备：
+					<select id="DeviceType_AudioPlayBack" onchange="GetTheValue( 'DeviceType_AudioPlayBack')" style=" width:250px;"></select>
+				</div>
+				<div id="Video_Parameter_Interface">
+					<table id="advanceset_div_Tab">
+						<tr>
+							<td class="td_input"><input type="checkbox" id="ServerSetting" onclick="ChangeTheResult('ServerSetting')" checked="checked" /></td>
+							<td>服务器配置参数优先</td>
+							<td></td>
+							<td class="td_input"><a>质量：</a></td>
+							<td><select id="quality" onchange="GetTheValue( 'quality')" disabled="disabled" style="width:80px;"></select></td>
+						</tr>
+						<tr>
+							<td class="td_input"><a>码率：</a></td>
+							<td><select id="code_rate" onchange="GetTheValue( 'code_rate')" disabled="disabled
+							" style=" width:80px;"></select></td>
+							<td></td>
+							<td class="td_input"><a>分辨率：</a></td>
+							<td><select id="distinguishability" onchange="GetTheValue( 'distinguishability')
+							" disabled="disabled" style=" width:80px;"></select></td>
+						</tr>
+						<tr>
+							<td class="td_input"><a>帧率：</a></td>
+							<td><select id="frame_rate" onchange="GetTheValue( 'frame_rate')" disabled="disabled
+							" style=" width:80px;"></select></td>
+							<td></td>
+							<td class="td_input">(当前分辨率：</td>
+							<td id="current_resolution"></td>
+						</tr>
+						<tr>
+							<td class="td_input"><a>预设：</a></td>
+							<td><select id="preinstall" onchange="GetTheValue('preinstall')" disabled="disabled" style=" width:80px;"></select></td>
+							<td></td>
+							<td>
+								<div id="apply_changes" onclick="BtnApply()">应用更改</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="Sound_Parameter_Interface">
+					<div style=" height:30px; margin:10px 0px 0px 5px;"><select id="Speak_Mode" style=" width:140px;" onChange="GetTheValue('Speak_Mode')"></select></div>
+					<div class="audio_tabcontrol"><input id="audio_vadctrl" onchange="ChangeTheResult('audio_vadctrl')" type="checkbox" />静音检测</div>
+					<div class="audio_tabcontrol"><input id="audio_echoctrl" onchange="ChangeTheResult('audio_echoctrl')" type="checkbox" />回音消除</div>
+					<div class="audio_tabcontrol"><input id="audio_nsctrl" onchange="ChangeTheResult('audio_nsctrl')" type="checkbox" />噪音抑制</div>
+					<div class="audio_tabcontrol"><input id="audio_agcctrl" onchange="ChangeTheResult('audio_agcctrl')" type="checkbox" />自动增益</div>
+				</div>
+				<div id="Other_Parameter_Interface">
+					<p style="float:left;margin:10px;"><input id="Checkbox_P2P" onchange="ChangeTheResult('Checkbox_P2P')" type="checkbox" />P2P优先</p>
+					<p style="float:left;margin:10px;">视频显示裁剪模式:<select id="videoshow_clipmode" onchange="GetTheValue('videoshow_clipmode')" style=" width:80px;"></select></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/plugins/anychat/logicfunc.js"></script>
