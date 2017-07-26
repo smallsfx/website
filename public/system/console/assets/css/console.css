@@ -10,11 +10,19 @@
 a {
   text-decoration: none;
 }
+body{
+  transition: 0.4s;
+}
+.showmenu {
+  transform: rotate(0) translateZ(100px) scale(.8);
+  /*translate(75%, 0%);*/
+
+}
 
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 6px;
   height: 6px;
   background-color: #333;
@@ -23,7 +31,7 @@ a {
 
 /*定义滚动条轨道 内阴影+圆角*/
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   border-radius: 0px;
   background-color: #eee;
 }
@@ -31,7 +39,7 @@ a {
 
 /*定义滑块 内阴影+圆角*/
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: #62a7e5;
 }
@@ -155,10 +163,7 @@ section {
   padding-right: 50px;
 }
 
-.nui-container>.nui-header a,
-.nui-container>.nui-header a:hover,
-.nui-container>.nui-header a:focus,
-.nui-container>.nui-header a:active {
+.nui-container>.nui-header a, .nui-container>.nui-header a:hover, .nui-container>.nui-header a:focus, .nui-container>.nui-header a:active {
   color: #62a7e5;
 }
 
@@ -166,8 +171,7 @@ section {
   text-decoration: underline;
 }
 
-.nui-container .nui-header-left,
-.nui-container .nui-header-right {
+.nui-container .nui-header-left, .nui-container .nui-header-right {
   font-size: 20px;
   margin: 0;
   padding: 10px 18px;
@@ -178,13 +182,11 @@ section {
   flex-wrap: wrap;
 }
 
-.nui-container .nui-header-left span,
-.nui-container .nui-header-right span {
+.nui-container .nui-header-left span, .nui-container .nui-header-right span {
   margin-left: 5px;
 }
 
-.nui-header-left>li,
-.nui-header-right>li {
+.nui-header-left>li, .nui-header-right>li {
   flex: auto;
   margin: 0;
   padding: 0px 10px;

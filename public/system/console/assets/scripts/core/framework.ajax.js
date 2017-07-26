@@ -63,28 +63,6 @@ define(['jquery', 'cfgs', 'base64', 'block', 'util'], function ($, cfgs, base64,
    */
 
   var _ajax_request = function (api, options, callback) {
-    /// <summary>发起AJAX请求.</summary>
-    /// <param name="api">请求的接口.</param>
-    /// <param name="options">请求附加的参数.
-    /// <para>[可选结构] 1</para>
-    /// <para>直接传入请求API时附带的参数.</para>
-    /// <para>[可选结构] 2</para>
-    /// <para>block       : 请求API时是否叠加遮罩.</para>
-    /// <para>async        : 请求API是否为异步请求.</para>
-    /// <para>args        : 请求API时附带的参数.</para>
-    /// <para>nocache  : 请求API成功回调时,是否将结果缓存,默认为false,即缓存结果.</para>
-    /// <para>error       : 请求返回时的异常处理函数 function(errorcode).</para>
-    /// </param>
-    /// <param name="callback">请求回调函数.
-    /// <para>[可选结构] 1</para>
-    /// <para>直接传入请求API成功时的回调函数.</para>
-    /// <para>[可选结构] 2</para>
-    /// <para>clear         : 清空表格数据(如果有表格) function().</para>
-    /// <para>noneDate  : 表格中添加没有数据提示(如果有表格) function().</para>
-    /// <para>success    : 请求API成功时的回调函数 function(json).</para>
-    /// <para>[可选结构] 3</para>
-    /// <para>不传入参数则视为调用默认参数 App.route.back().</para>
-    /// </param>
     var isBlock = true,
       cache = true,
       defaults = {},
@@ -124,7 +102,7 @@ define(['jquery', 'cfgs', 'base64', 'block', 'util'], function ($, cfgs, base64,
       if (isBlock) {
         block.close();
       }
-      console.info("请求完成:" + util.jsonToString(json));
+      console.info("请求完成:%o" , json);
       if (typeof errorParse === 'function') {
         var result = errorParse(json.c)
         if (!result) {

@@ -8,10 +8,10 @@ define(['util'], (util) => {
 
   const textformat = "%c%s [%s] ";
   const consoleStyles = {
-    'info': 'color:#2b82cf;text-shadow: 1px 1px 1px #ccc',
+    'info': 'color:#2b82cf;',//text-shadow: 1px 1px 0px #fff
     'debug': 'color:#b567df;',
-    'error': 'color:red;text-shadow: 1px 1px 1px #ccc',
-    'warn': 'color:#ff8a57;text-shadow: 1px 1px 1px #ccc',
+    'error': 'color:red;',
+    'warn': 'color:#ff8a57;',
   }
   const logtypes = {
     'info': "INFO ",

@@ -121,7 +121,7 @@
   return {
     /** 应用入口. */
     "onReady": function () {
-      console.groupCollapsed();
+      // console.groupCollapsed();
       App.logger.info("应用程序启动");
       /* 注册按钮事件 */
       $(".sys-logout").on("click", function () {
